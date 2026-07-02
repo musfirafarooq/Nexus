@@ -1,3 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* ---------- FullCalendar Custom Theme ---------- */
+
+.fc {
+  font-family: 'Inter', sans-serif;
+}
+
+.fc-toolbar-title {
+  font-size: 28px !important;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.fc-button {
+  background: #172f45 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  transition: .3s;
+}
+
+.fc-button:hover {
+  background: #172f45 !important;
+}
+
+.fc-button-active {
+  background: #172f45 !important;
+}
+
+.fc-daygrid-day {
+  transition: .2s;
+}
+
+.fc-daygrid-day:hover {
+  background: #eff6ff;
+}
+
+.fc-day-today {
+  background: #dbeafe !important;
+}
+
+.fc-event {
+  background: #267397 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #f5f5f5;
+}
+
+.fc-scrollgrid {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+  border-color: #e5e7eb !important;
+}
