@@ -35,60 +35,109 @@ Communicate through messaging UI
 The system is fully role-based (Investor / Entrepreneur) and provides a complete UI/UX workflow for startup funding interactions.
 
 ✨ Key Features
+
 👤 Authentication System
+
 Login / Register UI
+
 Role-based access (Investor / Entrepreneur)
+
 Password strength indicator
+
 OTP (2FA mock verification)
+
 📊 Dashboards
+
 Entrepreneur Dashboard (startups, investors, requests)
+
 Investor Dashboard (startup discovery, filtering, analytics)
+
 🤝 Collaboration System
+
 Investor → Entrepreneur collaboration requests
+
 Accept / Reject functionality
+
 Status tracking
+
 💰 Payment Module (Mock UI)
+
 Wallet balance system
+
 Deposit / Withdraw / Transfer simulation
+
 Transaction history UI
+
 Funding flow simulation
+
 📅 Meeting System
+
 Meeting scheduling interface
+
 Confirmed meetings view
+
 Meeting request handling
+
 📄 Document Management
+
 Upload & preview documents
+
 Document status tracking (Draft / Review / Signed)
+
 E-signature mock UI
+
 💬 Communication Module
+
 Chat UI (frontend)
+
 Messaging system design
+
 Notification system
+
 🔐 Security Features
+
 Password strength meter
+
 OTP verification (2FA mock)
+
 Role-based dashboard protection
+
 🛠️ Tech Stack
+
 React.js (Vite)
+
 TypeScript
+
 Tailwind CSS
+
 React Router DOM
+
 Context API
+
 Lucide Icons
+
 🚀 Deployment
+
 Hosted on Vercel
+
 Auto deployment via GitHub integration
+
 Optimized production build
+
 📈 Project Status
 
 ✔ Fully Completed Frontend Project
+
 ✔ All Modules Integrated
+
 ✔ Deployment Successful
+
 ✔ Ready for Submission
 
 👨‍💻 Developer
 
 Musfira Farooq
+
 Frontend Developer Intern – DevelopersHub Corporation
 
 🏁 Declaration
