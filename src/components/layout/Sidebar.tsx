@@ -12,6 +12,7 @@ import {
   Settings,
   HelpCircle,
   Calendar,
+  Wallet,
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -93,6 +94,11 @@ export const Sidebar: React.FC = () => {
       icon: <Calendar size={20} />,
       text: "Confirmed Meetings",
     },
+    {
+      to: "/payments",
+      icon: <Wallet size={20} />,
+      text: "Payments",
+    },
   ];
 
   const investorItems = [
@@ -140,6 +146,11 @@ export const Sidebar: React.FC = () => {
       to: "/confirmed-meetings",
       icon: <Calendar size={20} />,
       text: "Confirmed Meetings",
+    },
+    {
+      to: "/payments",
+      icon: <Wallet size={20} />,
+      text: "Payments",
     },
   ];
 

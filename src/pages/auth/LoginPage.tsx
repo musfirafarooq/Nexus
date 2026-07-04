@@ -5,6 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
 import { UserRole } from '../../types';
+import PasswordStrength from "../../components/auth/PasswordStrength";
+
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -23,8 +25,10 @@ export const LoginPage: React.FC = () => {
     
     try {
       await login(email, password, role);
-      // Redirect based on user role
-      navigate(role === 'entrepreneur' ? '/dashboard/entrepreneur' : '/dashboard/investor');
+      // Save role for OTP page
+      localStorage.setItem("userRole", role);
+      // Go to Two-Factor Authentication page
+      navigate("/2fa");
     } catch (err) {
       setError((err as Error).message);
       setIsLoading(false);
@@ -114,7 +118,7 @@ export const LoginPage: React.FC = () => {
               fullWidth
               startAdornment={<User size={18} />}
             />
-            
+
             <Input
               label="Password"
               type="password"
@@ -123,6 +127,7 @@ export const LoginPage: React.FC = () => {
               required
               fullWidth
             />
+            <PasswordStrength password={password} />
             
             <div className="flex items-center justify-between">
               <div className="flex items-center">

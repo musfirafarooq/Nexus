@@ -1,6 +1,8 @@
 import 
 { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import TwoFactorPage from "./pages/auth/TwoFactorPage";
+import PaymentsPage from "./pages/payments/PaymentsPage";
 
 // Layout
 import { DashboardLayout } from "./components/layout/DashboardLayout";
@@ -68,6 +70,12 @@ function App() {
 
           <Route path="/video-call" element={<DashboardLayout />}>
             <Route index element={<VideoCallPage />} />
+          </Route>
+
+          <Route path="/2fa" element={<TwoFactorPage />} />
+
+          <Route path="/payments" element={<DashboardLayout />}>
+            <Route index element={<PaymentsPage />} />
           </Route>
 
           {/* Profile */}
