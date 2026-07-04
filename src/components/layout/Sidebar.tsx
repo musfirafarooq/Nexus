@@ -20,7 +20,11 @@ interface SidebarItemProps {
   text: string;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ to, icon, text }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({
+  to,
+  icon,
+  text,
+}) => {
   return (
     <NavLink
       to={to}
@@ -50,7 +54,7 @@ export const Sidebar: React.FC = () => {
       text: "Dashboard",
     },
     {
-      to: `/profile/entrepreneur/${user.id}`,
+      to: "/profile/entrepreneur/" + user.id,
       icon: <Building2 size={20} />,
       text: "My Startup",
     },
@@ -98,7 +102,7 @@ export const Sidebar: React.FC = () => {
       text: "Dashboard",
     },
     {
-      to: `/profile/investor/${user.id}`,
+      to: "/profile/investor/" + user.id,
       icon: <CircleDollarSign size={20} />,
       text: "My Portfolio",
     },
@@ -140,7 +144,9 @@ export const Sidebar: React.FC = () => {
   ];
 
   const sidebarItems =
-    user.role === "entrepreneur" ? entrepreneurItems : investorItems;
+    user.role === "entrepreneur"
+      ? entrepreneurItems
+      : investorItems;
 
   const commonItems = [
     {
@@ -190,7 +196,9 @@ export const Sidebar: React.FC = () => {
 
         <div className="p-4 border-t border-gray-200">
           <div className="bg-gray-50 rounded-md p-3">
-            <p className="text-xs text-gray-600">Need assistance?</p>
+            <p className="text-xs text-gray-600">
+              Need assistance?
+            </p>
 
             <h4 className="text-sm font-medium text-gray-900 mt-1">
               Contact Support

@@ -1,145 +1,95 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Check, X, MessageCircle } from 'lucide-react';
-import { CollaborationRequest } from '../../types';
-import { Card, CardBody, CardFooter } from '../ui/Card';
-import { Avatar } from '../ui/Avatar';
-import { Badge } from '../ui/Badge';
-import { Button } from '../ui/Button';
-import { findUserById } from '../../data/users';
-import { updateRequestStatus } from '../../data/collaborationRequests';
-import { formatDistanceToNow } from 'date-fns';
+import React from "react";
+import { CheckCircle, XCircle, User, Building2 } from "lucide-react";
 
-interface CollaborationRequestCardProps {
-  request: CollaborationRequest;
-  onStatusUpdate?: (requestId: string, status: 'accepted' | 'rejected') => void;
+// Local type fallback for CollaborationRequestType to avoid import errors
+// Fields based on usage in this component
+export interface CollaborationRequestType {
+  id: number;
+  startup: string;
+  entrepreneur: string;
+  investor?: string;
+  message?: string;
+  date?: string;
+  status?: string;
 }
 
-export const CollaborationRequestCard: React.FC<CollaborationRequestCardProps> = ({
+interface Props {
+  request: CollaborationRequestType;
+  onAccept: (id: number) => void;
+  onReject: (id: number) => void;
+}
+
+const CollaborationRequestCard: React.FC<Props> = ({
   request,
-  onStatusUpdate
+  onAccept,
+  onReject,
 }) => {
-  const navigate = useNavigate();
-  const investor = findUserById(request.investorId);
-  
-  if (!investor) return null;
-  
-  const handleAccept = () => {
-    updateRequestStatus(request.id, 'accepted');
-    if (onStatusUpdate) {
-      onStatusUpdate(request.id, 'accepted');
-    }
-  };
-  
-  const handleReject = () => {
-    updateRequestStatus(request.id, 'rejected');
-    if (onStatusUpdate) {
-      onStatusUpdate(request.id, 'rejected');
-    }
-  };
-  
-  const handleMessage = () => {
-    navigate(`/chat/${investor.id}`);
-  };
-  
-  const handleViewProfile = () => {
-    navigate(`/profile/investor/${investor.id}`);
-  };
-  
-  const getStatusBadge = () => {
-    switch (request.status) {
-      case 'pending':
-        return <Badge variant="warning">Pending</Badge>;
-      case 'accepted':
-        return <Badge variant="success">Accepted</Badge>;
-      case 'rejected':
-        return <Badge variant="error">Declined</Badge>;
-      default:
-        return null;
-    }
-  };
-  
   return (
-    <Card className="transition-all duration-300">
-      <CardBody className="flex flex-col">
-        <div className="flex justify-between items-start">
-          <div className="flex items-start">
-            <Avatar
-              src={investor.avatarUrl}
-              alt={investor.name}
-              size="md"
-              status={investor.isOnline ? 'online' : 'offline'}
-              className="mr-3"
-            />
-            
-            <div>
-              <h3 className="text-md font-semibold text-gray-900">{investor.name}</h3>
-              <p className="text-sm text-gray-500">
-                {formatDistanceToNow(new Date(request.createdAt), { addSuffix: true })}
-              </p>
-            </div>
-          </div>
-          
-          {getStatusBadge()}
+    <div className="bg-white rounded-xl shadow border p-6 hover:shadow-lg transition">
+
+      <div className="flex justify-between items-start">
+
+        <div>
+
+          <h2 className="text-xl font-semibold flex items-center gap-2">
+            <Building2 size={20} className="text-blue-600" />
+            {request.startup}
+          </h2>
+
+          <p className="text-gray-600 mt-3 flex items-center gap-2">
+            <User size={16} />
+            Entrepreneur:
+            <span className="font-medium">
+              {request.entrepreneur}
+            </span>
+          </p>
+
+          <p className="text-gray-600 mt-2">
+            Investor:
+            <span className="font-medium">
+              {" "}
+              {request.investor}
+            </span>
+          </p>
+
+          <p className="mt-3 text-gray-700">
+            {request.message}
+          </p>
+
+          <p className="mt-4 text-sm text-gray-500">
+            Requested on: {request.date}
+          </p>
+
         </div>
-        
-        <div className="mt-4">
-          <p className="text-sm text-gray-600">{request.message}</p>
-        </div>
-      </CardBody>
-      
-      <CardFooter className="border-t border-gray-100 bg-gray-50">
-        {request.status === 'pending' ? (
-          <div className="flex justify-between w-full">
-            <div className="space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                leftIcon={<X size={16} />}
-                onClick={handleReject}
-              >
-                Decline
-              </Button>
-              <Button
-                variant="success"
-                size="sm"
-                leftIcon={<Check size={16} />}
-                onClick={handleAccept}
-              >
-                Accept
-              </Button>
-            </div>
-            
-            <Button
-              variant="primary"
-              size="sm"
-              leftIcon={<MessageCircle size={16} />}
-              onClick={handleMessage}
-            >
-              Message
-            </Button>
-          </div>
-        ) : (
-          <div className="flex justify-between w-full">
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={<MessageCircle size={16} />}
-              onClick={handleMessage}
-            >
-              Message
-            </Button>
-            
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handleViewProfile}
-            >
-              View Profile
-            </Button>
-          </div>
-        )}
-      </CardFooter>
-    </Card>
+
+        <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
+          {request.status}
+        </span>
+
+      </div>
+
+      <div className="flex gap-3 mt-6">
+
+        <button
+          onClick={() => onAccept(request.id)}
+          className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+        >
+          <CheckCircle size={18} />
+          Accept
+        </button>
+
+        <button
+          onClick={() => onReject(request.id)}
+          className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+        >
+          <XCircle size={18} />
+          Reject
+        </button>
+
+      </div>
+
+    </div>
   );
 };
+
+export default CollaborationRequestCard;

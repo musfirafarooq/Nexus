@@ -1,9 +1,11 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import 
+{ BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 // Layout
 import { DashboardLayout } from "./components/layout/DashboardLayout";
+
+import VideoCallPage from "./pages/meetings/VideoCallPage";
 
 // Auth Pages
 import { LoginPage } from "./pages/auth/LoginPage";
@@ -62,6 +64,10 @@ function App() {
 
           <Route path="/confirmed-meetings" element={<DashboardLayout />}>
             <Route index element={<ConfirmedMeetings />} />
+          </Route>
+
+          <Route path="/video-call" element={<DashboardLayout />}>
+            <Route index element={<VideoCallPage />} />
           </Route>
 
           {/* Profile */}
